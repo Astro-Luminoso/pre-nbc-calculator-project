@@ -5,32 +5,17 @@ public class CalculatorHistory {
     private final CalculatorOperator operator;
     private double result;
 
-    public CalculatorHistory(double lhsOperand, double rhsOperand, CalculatorOperator operator) throws IllegalArgumentException{
+    public CalculatorHistory(double lhsOperand, double rhsOperand, CalculatorOperator operator){
         this.lhsOperand = lhsOperand;
         this.rhsOperand = rhsOperand;
         this.operator = operator;
     }
 
     public CalculatorHistory calculate() {
-        switch (operator) {
-            case ADD:
-                result = lhsOperand + rhsOperand;
-                break;
-            case SUBTRACT:
-                result = lhsOperand - rhsOperand;
-                break;
-            case MULTIPLY:
-                result = lhsOperand * rhsOperand;
-                break;
-            case DIVIDE:
-                if (rhsOperand == 0) {
-                    throw new ArithmeticException("0으로 나눌 수 없습니다.");
-                }
-                result = lhsOperand / rhsOperand;
-                break;
-        }
 
+        this.result = operator.calculate(lhsOperand, rhsOperand);
         return this;
+
     }
 
     public double getResult() {
@@ -40,7 +25,8 @@ public class CalculatorHistory {
 
     @Override
     public String toString() {
-        return String.format("%.1f %s %.1f, %.1f", lhsOperand, operator.getSymbol(), rhsOperand, result);
+        return String.format("[LHS: %.1f, Operator: %s, RHS: %.1f, Result: %.1f]",
+                lhsOperand, operator.getSymbol(), rhsOperand, result);
     }
 }
 
