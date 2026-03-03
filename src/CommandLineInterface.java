@@ -35,8 +35,11 @@ public class CommandLineInterface {
         System.out.printf("%.1f%n", history.getResult());
     }
 
-
-
+    public boolean returnContinueValue(String message) {
+        this.printCustomInputMessage(message);
+        String input = scanner.nextLine().trim().toLowerCase();
+        return input.equals("y") || input.equals("yes");
+    }
 
     /**
      * Scanner를 닫은 후 종료 메시지 출력
