@@ -1,6 +1,6 @@
 public class CalculatorExecutor {
 
-    private CommandLineInterface cli;
+    private final CommandLineInterface cli;
 
     public CalculatorExecutor() {
         this.cli = new CommandLineInterface();
