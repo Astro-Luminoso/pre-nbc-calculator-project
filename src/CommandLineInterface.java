@@ -21,29 +21,22 @@ public class CommandLineInterface {
     }
 
     /**
-     * 사용자로부터 연산자 입력을 받는 메서드
+     * 사용자로부터 입력값을 받는 메서드
      * @param message 사용자에게 보여줄 입력 메시지 문자열
-     * @return 사용자가 입력한 연산자 문자열
+     * @return 사용자가 입력한 값
      */
-    public String returnOperator(String message) {
+    public String returnValue(String message) {
         this.printCustomInputMessage(message);
         return scanner.nextLine();
     }
 
-    /**
-     * 사용자로부터 피연산자 입력을 받는 메서드
-     * @param message 사용자에게 보여줄 입력 메시지 문자열
-     * @return 사용자가 입력한 피연산자 정수값, 유효하지 않은 입력이 들어올 경우 재귀적으로 다시 입력을 받음
-     */
-    public int returnOperand(String message){
-        this.printCustomInputMessage(message);
-        try {
-            return Integer.parseInt(scanner.nextLine());
-        } catch (NumberFormatException e) {
-            System.out.println("유효한 숫자를 입력해주세요.");
-            return this.returnOperand(message);    // return value in recursion until valid input is received
-        }
+    public void printResultMessage(CalculatorHistory history) {
+        this.printCustomInputMessage("출력");
+        System.out.printf("%.1f%n", history.getResult());
     }
+
+
+
 
     /**
      * Scanner를 닫은 후 종료 메시지 출력
