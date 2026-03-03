@@ -36,6 +36,7 @@ public class CommandLineInterface {
      * @return 사용자가 입력한 피연산자 정수값, 유효하지 않은 입력이 들어올 경우 재귀적으로 다시 입력을 받음
      */
     public int returnOperand(String message){
+        this.printCustomInputMessage(message);
         try {
             return Integer.parseInt(scanner.nextLine());
         } catch (NumberFormatException e) {
