@@ -57,7 +57,7 @@ public class CommandLineInterface {
 
     public void printResultMessage(double result) {
         this.printPrompt("출력");
-        System.out.println(result);
+        System.out.printf("%.1f%n",result);
     }
 
     public boolean checkUsingResultAsLhsOperand(double result) {
