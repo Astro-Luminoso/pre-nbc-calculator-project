@@ -3,6 +3,8 @@ import java.util.Scanner;
 /**
  * CommandLineInterface 클래스는 사용자와의 상호작용을 담당하는 클래스입니다.
  * 기본적으로 사용자로부터 입력을 받고, 메시지를 출력하는 기능을 제공합니다.
+ *
+ * @author HanByeol Yang
  */
 public class CommandLineInterface {
 
