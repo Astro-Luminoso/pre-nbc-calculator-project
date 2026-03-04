@@ -7,13 +7,7 @@ public class CalculatorHistory {
         this.record = record;
         this.result = result;
     }
-
-    public String lhsOperandToString() {
-
-        return String.format("%.1f", this.record.lhsOperand());
-    }
-
-
+    
     public double getResult() {
         return this.result;
     }
