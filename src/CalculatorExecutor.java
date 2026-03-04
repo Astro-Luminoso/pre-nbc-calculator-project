@@ -4,57 +4,74 @@ import java.util.List;
 public class CalculatorExecutor {
 
     private final CommandLineInterface cli;
-    private List<CalculatorHistory> historyList;
+    private InputRecord record;
+    private CalculatorHistory history;
 
-    public CalculatorExecutor() {
-        this.cli = new CommandLineInterface();
-        this.historyList = new ArrayList<>();
+    public CalculatorExecutor(CommandLineInterface cli) {
+        this.cli = cli;
     }
 
-    public void play() {
+    public void run() {
 
-        boolean isRunning = true;
+        cli.welcomeMessage();
+        calculatorMainLoop();
 
-        while (isRunning) {
+        // terminate program
+        cli.closeCli();
+    }
 
-            // TODO: Implement
-            String lhsOperand = cli.returnValue("첫 번째 피연산자를 입력하세요");
-            String operator = cli.returnValue("연산자를 입력하세요 (+, -, *, /)");
-            String rhsOperand = cli.returnValue("두 번째 피연산자를 입력하세요");
-            CalculatorHistory history;
+    public void createCalculatorRecord(String lhsOperand, String operator, String rhsOperand) {
 
-            try {
-                history = new CalculatorHistory(
-                        Double.parseDouble(lhsOperand),
-                        Double.parseDouble(rhsOperand),
-                        CalculatorOperator.fromSymbol(operator)).calculate();
-            } catch (NumberFormatException e){
-                System.out.println("유효하지 않은 숫자입니다. 다시 입력해주세요.");
+        // need castedLhsOperand to double for creating InputRecord, but if lhsOperand is null, use history's result as lhsOperand
+        double castedLhsOperand;
+
+        if(this.history == null && lhsOperand == null) throw new NumberFormatException();
+
+        else if (lhsOperand == null) castedLhsOperand = history.getResult();
+        else castedLhsOperand = Double.parseDouble(lhsOperand);
+
+        this.record = new InputRecord(
+                castedLhsOperand,
+                CalculatorOperator.fromSymbol(operator),
+                Double.parseDouble(rhsOperand));
+    }
+
+    public void calculate() {
+        double result = record.operator().calculate(record.lhsOperand(), record.rhsOperand());
+        history = new CalculatorHistory(record, result);
+    }
+
+    public void calculatorMainLoop() {
+
+        boolean useLhsOperand = false;
+
+        while (true) {
+            String[] inputValues = cli.initializeCalculation(useLhsOperand);
+
+            try{
+                createCalculatorRecord(inputValues[0], inputValues[1], inputValues[2]);
+            } catch (NumberFormatException e) {
+                cli.printMessage(cli.INVALID_NUMBER_MESSAGE);
                 continue;
             } catch (IllegalArgumentException e) {
-                System.out.println("유효하지 않은 연산자입니다. 다시 입력해주세요.");
-                continue;
-            } catch (ArithmeticException e) {
-                System.out.println("0으로 나눌 수 없습니다.");
+                cli.printMessage(cli.INVALID_OPERATOR_MESSAGE);
                 continue;
             }
 
-            cli.printResultMessage(history);
-//            System.out.println(history);
-
-            isRunning = cli.returnContinueValue("계속하시겠습니까? (y/n)");
-
-            if(!isRunning) {
-               cli.closeCli();
-           } else {
-                historyList.add(history);
-                System.out.println(historyList.toString());
-           }
+            try {
+                this.calculate();
+            } catch (ArithmeticException e) {
+                System.out.println(cli.DIVISION_BY_ZERO_MESSAGE);
+                continue;
+            }
 
 
+            cli.printResultMessage(history.getResult());
 
+            useLhsOperand = cli.checkUsingResultAsLhsOperand(history.getResult());
 
-
+            if (useLhsOperand) continue;
+            if (!cli.checkContinue()) break;
         }
     }
 }

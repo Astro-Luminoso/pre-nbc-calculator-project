@@ -7,7 +7,7 @@ public enum CalculatorOperator {
     MULTIPLY("*", (Double lhs, Double rhs) -> lhs * rhs),
     DIVIDE("/", (Double lhs, Double rhs) -> {;
         if (rhs == 0) {
-            throw new ArithmeticException("0으로 나눌 수 없습니다.");
+            throw new ArithmeticException();
         }
         return lhs / rhs;
     });

@@ -1,22 +1,18 @@
 public class CalculatorHistory {
 
-    private final double lhsOperand;
-    private final double rhsOperand;
-    private final CalculatorOperator operator;
-    private double result;
+    private final InputRecord record;
+    private final double result;
 
-    public CalculatorHistory(double lhsOperand, double rhsOperand, CalculatorOperator operator){
-        this.lhsOperand = lhsOperand;
-        this.rhsOperand = rhsOperand;
-        this.operator = operator;
+    public CalculatorHistory(InputRecord record, double result){
+        this.record = record;
+        this.result = result;
     }
 
-    public CalculatorHistory calculate() {
+    public String lhsOperandToString() {
 
-        this.result = operator.calculate(lhsOperand, rhsOperand);
-        return this;
-
+        return String.format("%.1f", this.record.lhsOperand());
     }
+
 
     public double getResult() {
         return this.result;
@@ -26,7 +22,7 @@ public class CalculatorHistory {
     @Override
     public String toString() {
         return String.format("[LHS: %.1f, Operator: %s, RHS: %.1f, Result: %.1f]",
-                lhsOperand, operator.getSymbol(), rhsOperand, result);
+                record.lhsOperand(), record.operator().getSymbol(), record.rhsOperand(), result);
     }
 }
 
