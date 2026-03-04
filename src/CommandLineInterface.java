@@ -1,9 +1,19 @@
 import java.util.Scanner;
 
+/**
+ * CommandLineInterface 클래스는 사용자와의 상호작용을 담당하는 클래스입니다.
+ * 기본적으로 사용자로부터 입력을 받고, 메시지를 출력하는 기능을 제공합니다.
+ */
 public class CommandLineInterface {
 
+    /**
+     * 사용자 입력을 처리하기 위한 Scanner 객체
+     */
     Scanner scanner;
 
+    /**
+     * 애러 메시지
+     */
     public final String INVALID_NUMBER_MESSAGE = "유효한 숫자를 입력하세요.";
     public final String INVALID_OPERATOR_MESSAGE = "지원하지 않는 연산자입니다.";
     public final String DIVISION_BY_ZERO_MESSAGE = "0으로 나눌 수 없습니다.";
@@ -16,6 +26,9 @@ public class CommandLineInterface {
     }
 
 
+    /**
+     * 환영 메시지를 출력하는 메서드
+     */
     public void welcomeMessage() {
         System.out.println("=== Java 계산기 ===");
     }
@@ -30,6 +43,11 @@ public class CommandLineInterface {
         System.out.print(message + ": ");
     }
 
+    /**
+     * 사용자에게 일반 메시지를 출력하는 메서드
+     *
+     * @param message 출력 메시지 문자열
+     */
     public void printMessage(String message) {
         System.out.println(message);
     }
@@ -55,17 +73,33 @@ public class CommandLineInterface {
         return inputValues;
     }
 
+    /**
+     * 계산 결과를 출력하는 메서드
+     *
+     * @param result 계산 결과를 나타내는 double 값, 소수점 첫째 자리까지 출력
+     */
     public void printResultMessage(double result) {
         this.printPrompt("출력");
         System.out.printf("%.1f%n",result);
     }
 
+    /**
+     * 이전 계산 결과를 첫 번째 숫자로 사용할지 여부를 묻는 메서드
+     *
+     * @param result 이전 계산 결과를 나타내는 double 값, 소수점 첫째 자리까지 출력
+     * @return 사용자가 이전 결과를 사용을 원할 경우 true, 그렇지 않을 경우 false
+     */
     public boolean checkUsingResultAsLhsOperand(double result) {
         this.printPrompt(String.format("이전 결과(%.1f)f를 사용하시겠습니까? (y/n)", result));
         String response = scanner.nextLine().trim().toLowerCase();
         return response.equals("y");
     }
 
+    /**
+     * 계속 계산할지 여부를 묻는 메서드
+     *
+     * @return 사용자가 계속 계산을 원할 경우 true, 그렇지 않을 경우 false
+     */
     public boolean checkContinue() {
         this.printPrompt("계속 계산하시겠습니까? (y/n)");
         String response = scanner.nextLine().trim().toLowerCase();
