@@ -1,5 +1,9 @@
 import java.util.function.BiFunction;
 
+/**
+ * CalculatorOperator는 계산기의 연산자와 해당 연산을 수행하는 기능을 정의함
+ * 각 연산자는 심볼과 연산을 수행하는 BiFunction을 가지고 있으며, fromSymbol 메서드를 통해 문자열로부터 연산자를 찾을 수 있음
+ */
 public enum CalculatorOperator {
 
     ADD("+", (Double lhs, Double rhs) -> lhs + rhs),
