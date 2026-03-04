@@ -6,6 +6,7 @@ import java.util.function.BiFunction;
  */
 public enum CalculatorOperator {
 
+
     ADD("+", (Double lhs, Double rhs) -> lhs + rhs),
     SUBTRACT("-", (Double lhs, Double rhs) -> lhs - rhs),
     MULTIPLY("*", (Double lhs, Double rhs) -> lhs * rhs),
@@ -19,22 +20,41 @@ public enum CalculatorOperator {
     private final String symbol;
     private final BiFunction<Double, Double, Double> operation;
 
+    /**
+     * CalculatorOperator 생성자
+     *
+     * @param symbol
+     * @param operation
+     */
     CalculatorOperator(String symbol, BiFunction<Double, Double, Double> operation) {
         this.symbol = symbol;
         this.operation = operation;
     }
 
+    /**
+     * 연산자의 기호를 반환하는 메서드
+     *
+     * @return 연산자의 심볼 문자열
+     */
     public String getSymbol() {
         return symbol;
     }
 
+    /**
+     * 전달된 문자열에서 해당하는 연산자를 찾아 반환함
+     *
+     * @param symbol 연산자의 심볼 문자열, 예: "+", "-", "*", "/"
+     * @return 해당하는 CalculatorOperator 열거형 값
+     *
+     * @throws IllegalArgumentException 전달된 문자열이 유효한 연산자 기호가 아닌 경우 발생
+     */
     public static CalculatorOperator fromSymbol(String symbol) {
         for (CalculatorOperator operator : CalculatorOperator.values()) {
             if (operator.getSymbol().equals(symbol)) {
                 return operator;
             }
         }
-        throw new IllegalArgumentException("유효하지 않은 연산자입니다: " + symbol);
+        throw new IllegalArgumentException();
     }
 
     public double calculate(double lhs, double rhs) {

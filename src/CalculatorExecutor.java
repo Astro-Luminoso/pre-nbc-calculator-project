@@ -1,5 +1,5 @@
 /**
- * CalculatorExecutor 클래스는 계산기의 실행을 담당하는 클래스
+ * 계산기의 실행을 담당하는 클래스
  * CommandLineInterface 객체를 통해 사용자와 상호작용하며, 입력된 계산식을 처리하고 결과를 출력
  * 계산 과정에서 발생할 수 있는 예외를 처리한 후 CommandLineInterface를 통해 애러메시지를 출력
  *
