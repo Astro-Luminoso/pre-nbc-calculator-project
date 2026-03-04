@@ -55,17 +55,6 @@ public class CommandLineInterface {
         return inputValues;
     }
 
-    public boolean executeCalculation() {
-        try {
-            executor.calculate();
-        } catch (ArithmeticException e) {
-            System.out.println("0으로 나눌 수 없습니다.");
-            return false;
-        }
-
-        return true;
-    }
-
     public void printResultMessage(double result) {
         this.printPrompt("출력");
         System.out.println(result);
