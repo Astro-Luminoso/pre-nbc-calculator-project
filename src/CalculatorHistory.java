@@ -36,7 +36,7 @@ public class CalculatorHistory {
 
     @Override
     public String toString() {
-        return String.format("[LHS: %.1f, Operator: %s, RHS: %.1f, Result: %.1f]",
+        return String.format("%.1f %s %.1f = %.1f",
                 record.lhsOperand(), record.operator().getSymbol(), record.rhsOperand(), result);
     }
 }

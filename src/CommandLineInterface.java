@@ -78,11 +78,11 @@ public class CommandLineInterface {
     /**
      * 계산 결과를 출력하는 메서드
      *
-     * @param result 계산 결과를 나타내는 double 값, 소수점 첫째 자리까지 출력
+     * @param result CalculatorHistory 객체, toString 메서드를 통해 계산 기록과 결과를 함께 출력
      */
-    public void printResultMessage(double result) {
+    public void printResultMessage(CalculatorHistory result) {
         this.printPrompt("출력");
-        System.out.printf("%.1f%n",result);
+        System.out.printf("%s%n",result);
     }
 
     /**

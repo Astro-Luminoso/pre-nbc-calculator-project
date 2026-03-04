@@ -96,7 +96,7 @@ public class CalculatorExecutor {
             }
 
 
-            cli.printResultMessage(history.getResult());
+            cli.printResultMessage(history);
 
             useLhsOperand = cli.checkUsingResultAsLhsOperand(history.getResult());
 
